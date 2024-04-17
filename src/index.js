@@ -12,7 +12,6 @@ export class GeocamViewerOrbitControls extends HTMLElement {
     console.log("orbit-controls connected");
     const node = this;
     this.controls = new orbitControls();
-    debugger;
     const parent = this.parentNode;
     if (parent.viewer && parent.viewer.plugin) {
       // Call a method on the parent
