@@ -11,11 +11,12 @@ export class GeocamViewerOrbitControls extends HTMLElement {
   connectedCallback() {
     console.log("orbit-controls connected");
     const node = this;
-    this.controls = new orbitControls();
+    this.plugin = new orbitControls();
     const parent = this.parentNode;
-    if (parent.viewer && parent.viewer.plugin) {
+    this.viewer = parent.viewer;
+    if ( this.viewer &&  this.viewer.plugin) {
       // Call a method on the parent
-      parent.viewer.plugin(this.controls);
+        this.viewer.plugin(this.plugin);
     } else {
       console.error(
         "GeocamViewerOrbitControls must be a child of GeocamViewer"
@@ -25,6 +26,7 @@ export class GeocamViewerOrbitControls extends HTMLElement {
 
   disconnectedCallback() {
     this.controls = null;
+    this.viewer = null;
     console.log("orbit controls disconnected");
     // Clean up the viewer
   }

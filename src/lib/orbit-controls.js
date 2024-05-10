@@ -72,10 +72,11 @@ export const orbitControls = function (config = {}) {
   };
 
   const handleKey = function (e) {
-    const code = e.keyCode;
-    if (code == 37 || code == 39) {
+    const left  = e.key === 'ArrowLeft' || e.key === 'a';
+    const right = e.key === 'ArrowRight' || e.key === 'd';
+    if (left|| right) {
       lastPanTime = performance.now();
-      keyPanning = code == 39 ? 1 : -1;
+      keyPanning = right ? 1 : -1;
       requestAnimationFrame(keyPan);
     }
   };
