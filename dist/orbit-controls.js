@@ -1,39 +1,39 @@
-const M = function(p = {}) {
+const y = function(p = {}) {
   let e, d, m, f, u, l = !1, r = 0, c = 0;
-  const s = function(n) {
+  const i = function(n) {
     let o = e.fov();
     n.wheelDeltaY ? o -= n.wheelDeltaY * 0.05 : n.wheelDelta ? o -= n.wheelDelta * 0.05 : n.detail && (o += n.detail * 1), (o < 10 || o > 130) && (o = o < 10 ? 10 : 130), e.fov(o);
-  }, i = function(n) {
+  }, s = function(n) {
     l = !1;
   }, w = function(n) {
     if (l) {
       e.facing();
-      const o = e.fov(), t = e.wrapper.clientHeight, g = o / t;
-      let D = (n.clientX - d) * -g + f, a = (n.clientY - m) * -g + u;
+      const o = e.fov(), t = e.wrapper.clientHeight, L = o / t;
+      let D = (n.clientX - d) * -L + f, a = (n.clientY - m) * -L + u;
       a = Math.max(-85, Math.min(85, a)), e.facing((360 + D) % 360), e.horizon(a);
     }
   }, v = function(n) {
     n.preventDefault(), d = n.clientX, m = n.clientY, f = e.facing(), u = e.horizon(), l = !0;
-  }, E = function() {
+  }, h = function() {
     if (r) {
       const o = performance.now() - c;
       let t = e.facing();
-      t = t + 50 / 1e3 * o * r, e.facing((360 + t) % 360), c += o, requestAnimationFrame(E);
+      t = t + 50 / 1e3 * o * r, e.facing((360 + t) % 360), c += o, requestAnimationFrame(h);
     }
-  }, h = function(n) {
-    const o = n.keyCode;
-    (o == 37 || o == 39) && (c = performance.now(), r = o == 39 ? 1 : -1, requestAnimationFrame(E));
-  }, L = function(n) {
+  }, E = function(n) {
+    const o = n.key === "ArrowLeft" || n.key === "a", t = n.key === "ArrowRight" || n.key === "d";
+    (o || t) && (c = performance.now(), r = t ? 1 : -1, requestAnimationFrame(h));
+  }, g = function(n) {
     r = 0;
   };
   this.init = function(n) {
     e = n, e.renderer.domElement.addEventListener(
       "mousewheel",
-      s,
+      i,
       !1
     ), e.renderer.domElement.addEventListener(
       "DOMMouseScroll",
-      s,
+      i,
       !1
     ), e.renderer.domElement.addEventListener(
       "mousedown",
@@ -41,25 +41,25 @@ const M = function(p = {}) {
       !1
     ), e.renderer.domElement.addEventListener(
       "mouseup",
-      i,
+      s,
       !1
     ), e.renderer.domElement.addEventListener(
       "mouseleave",
-      i,
+      s,
       !1
     ), e.renderer.domElement.addEventListener(
       "mousemove",
       w,
       !1
-    ), window.addEventListener("keydown", h), window.addEventListener("keyup", L);
+    ), window.addEventListener("keydown", E), window.addEventListener("keyup", g);
   }, this.destroy = function() {
     e.renderer.domElement.removeEventListener(
       "mousewheel",
-      s,
+      i,
       !1
     ), e.renderer.domElement.removeEventListener(
       "DOMMouseScroll",
-      s,
+      i,
       !1
     ), e.renderer.domElement.removeEventListener(
       "mousedown",
@@ -67,38 +67,38 @@ const M = function(p = {}) {
       !1
     ), e.renderer.domElement.removeEventListener(
       "mouseup",
-      i,
+      s,
       !1
     ), e.renderer.domElement.removeEventListener(
       "mouseleave",
-      i,
+      s,
       !1
     ), e.renderer.domElement.removeEventListener(
       "mousemove",
       w,
       !1
-    ), window.removeEventListener("keydown", h), window.removeEventListener("keyup", L);
+    ), window.removeEventListener("keydown", E), window.removeEventListener("keyup", g);
   };
 };
-class P extends HTMLElement {
+class k extends HTMLElement {
   constructor() {
     super(), this.controls = null, console.log("orbit-controls init");
   }
   connectedCallback() {
-    console.log("orbit-controls connected"), this.controls = new M();
+    console.log("orbit-controls connected"), this.plugin = new y();
     const e = this.parentNode;
-    e.viewer && e.viewer.plugin ? e.viewer.plugin(this.controls) : console.error(
+    this.viewer = e.viewer, this.viewer && this.viewer.plugin ? this.viewer.plugin(this.plugin) : console.error(
       "GeocamViewerOrbitControls must be a child of GeocamViewer"
     );
   }
   disconnectedCallback() {
-    this.controls = null, console.log("orbit controls disconnected");
+    this.controls = null, this.viewer = null, console.log("orbit controls disconnected");
   }
 }
 window.customElements.define(
   "geocam-viewer-orbit-controls",
-  P
+  k
 );
 export {
-  P as GeocamViewerOrbitControls
+  k as GeocamViewerOrbitControls
 };
