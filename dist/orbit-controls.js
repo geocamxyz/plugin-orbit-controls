@@ -1,5 +1,5 @@
-const y = function(p = {}) {
-  let e, d, m, f, u, l = !1, r = 0, c = 0;
+const y = function(L = {}) {
+  let e, d, m, u, f, l = !1, r = 0, c = 0;
   const i = function(n) {
     let o = e.fov();
     n.wheelDeltaY ? o -= n.wheelDeltaY * 0.05 : n.wheelDelta ? o -= n.wheelDelta * 0.05 : n.detail && (o += n.detail * 1), (o < 10 || o > 130) && (o = o < 10 ? 10 : 130), e.fov(o);
@@ -8,12 +8,12 @@ const y = function(p = {}) {
   }, w = function(n) {
     if (l) {
       e.facing();
-      const o = e.fov(), t = e.wrapper.clientHeight, L = o / t;
-      let D = (n.clientX - d) * -L + f, a = (n.clientY - m) * -L + u;
+      const o = e.fov(), t = e.wrapper.clientHeight, p = o / t;
+      let D = (n.clientX - d) * -p + u, a = (n.clientY - m) * -p + f;
       a = Math.max(-85, Math.min(85, a)), e.facing((360 + D) % 360), e.horizon(a);
     }
   }, v = function(n) {
-    n.preventDefault(), d = n.clientX, m = n.clientY, f = e.facing(), u = e.horizon(), l = !0;
+    n.preventDefault(), d = n.clientX, m = n.clientY, u = e.facing(), f = e.horizon(), l = !0;
   }, h = function() {
     if (r) {
       const o = performance.now() - c;
@@ -21,6 +21,8 @@ const y = function(p = {}) {
       t = t + 50 / 1e3 * o * r, e.facing((360 + t) % 360), c += o, requestAnimationFrame(h);
     }
   }, E = function(n) {
+    if (n.target.closest("input"))
+      return;
     const o = n.key === "ArrowLeft" || n.key === "a", t = n.key === "ArrowRight" || n.key === "d";
     (o || t) && (c = performance.now(), r = t ? 1 : -1, requestAnimationFrame(h));
   }, g = function(n) {
