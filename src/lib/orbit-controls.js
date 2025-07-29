@@ -72,7 +72,7 @@ export const orbitControls = function (config = {}) {
   };
 
   const handleKey = function (e) {
-        if (e.target.closest('input')) return;
+    if (e.target.closest('input,calcite-input')) return;
     const left  = e.key === 'ArrowLeft' || e.key === 'a';
     const right = e.key === 'ArrowRight' || e.key === 'd';
     if (left|| right) {
