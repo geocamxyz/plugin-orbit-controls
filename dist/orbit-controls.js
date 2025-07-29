@@ -21,7 +21,7 @@ const y = function(L = {}) {
       t = t + 50 / 1e3 * o * r, e.facing((360 + t) % 360), c += o, requestAnimationFrame(h);
     }
   }, E = function(n) {
-    if (n.target.closest("input"))
+    if (n.target.closest("input,calcite-input"))
       return;
     const o = n.key === "ArrowLeft" || n.key === "a", t = n.key === "ArrowRight" || n.key === "d";
     (o || t) && (c = performance.now(), r = t ? 1 : -1, requestAnimationFrame(h));
