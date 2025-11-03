@@ -1,7 +1,7 @@
 {
   "name": "orbit-controls",
   "private": true,
-  "version": "2.2.4rc1",
+  "version": "2.2.4rc2",
   "type": "module",
   "scripts": {
     "build": "vite build"
