@@ -1,0 +1,16 @@
+{
+  "name": "orbit-controls",
+  "private": true,
+<<<<<<< HEAD
+  "version": "2.4.0rc2",
+=======
+  "version": "2.4.0rc3",
+>>>>>>> 53c4bc4aa405e13ba22f4326923a1bce591aca76
+  "type": "module",
+  "scripts": {
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "^4.0.4"
+  }
+}
