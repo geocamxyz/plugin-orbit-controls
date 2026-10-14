@@ -2,10 +2,10 @@
   "name": "orbit-controls",
   "private": true,
 <<<<<<< HEAD
-  "version": "2.4.0rc2",
+  "version": "2.4.6",
 =======
-  "version": "2.4.0rc3",
->>>>>>> 53c4bc4aa405e13ba22f4326923a1bce591aca76
+  "version": "2.4.7",
+>>>>>>> 7d7cbc5b9c83d93316fc553619662c9eb39e172b
   "type": "module",
   "scripts": {
     "build": "vite build"
